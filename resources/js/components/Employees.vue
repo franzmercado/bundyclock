@@ -3,14 +3,22 @@
         <div class="row">
             <div class="col-md-12">
               <br>
-              <h5>Employees</h5>
+              <div class="row">
+
+                <div class="col-md-10">
+                  <h5><i class="fas fa-users"></i> Employee List</h5>
+                </div>
+                <div class="col-md-2">
+                  <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#addModal">Add Employee <i class="fas fa-user-plus"></i></button>
+                </div>
+              </div>
               <hr>
-                 <table id="example1" class="table table-bordered table-striped">
+                 <table id="employee_tbl" class="table table-bordered table-striped">
                    <thead>
                    <tr>
                      <th>Employee ID</th>
                      <th>Name</th>
-                     <th>Department(s)</th>
+                     <th>Department</th>
                      <th>Shift</th>
                      <th>Action</th>
                    </tr>
@@ -30,6 +38,26 @@
                  </table>
             </div>
         </div>
+  <!--Add Modal -->
+  <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addModalLabel">Add Employee</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+  </div>
     </div>
 </template>
 

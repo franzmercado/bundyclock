@@ -48,7 +48,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="/dashboard" class="brand-link">
+    <a href="" class="brand-link">
       <img src="/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light">BundyClock</span>
@@ -89,21 +89,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <router-link to="/employees" class="nav-link ">
-                  <i class="fas fa-users nav-icon"></i>
+                  <i class="fas fa-adjust nav-icon"></i>
                   <p>Employees</p>
                 </router-link>
               </li>
-              {{-- <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Inactive Page</p>
-                </a>
-              </li> --}}
+              <li class="nav-item">
+                <router-link to="#" class="nav-link ">
+                  <i class="fas fa-adjust  nav-icon"></i>
+                  <p>Departments</p>
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <router-link to="#" class="nav-link ">
+                  <i class="fas fa-adjust  nav-icon"></i>
+                  <p>Shifts</p>
+                </router-link>
+              </li>
+
             </ul>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-file"></i>
+              <i class="nav-icon fas fa-file-pdf"></i>
               <p>
                 Reports
                 {{-- <span class="right badge badge-danger">New</span> --}}
