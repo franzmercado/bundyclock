@@ -78,7 +78,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </p>
             </router-link>
           </li>
-          <li class="nav-item has-treeview ">
+          <li class="nav-item has-treeview {{ Request::path() == 'employees' ? 'menu-open' : '' }} ">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-tasks"></i>
               <p>
@@ -88,17 +88,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link ">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Active Page</p>
-                </a>
+                <router-link to="/employees" class="nav-link ">
+                  <i class="fas fa-users nav-icon"></i>
+                  <p>Employees</p>
+                </router-link>
               </li>
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Inactive Page</p>
                 </a>
-              </li>
+              </li> --}}
             </ul>
           </li>
           <li class="nav-item">
@@ -123,15 +123,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <a href="{{ route('logout') }}" class="nav-link"
                     onclick="event.preventDefault();
                           document.getElementById('logout-form').submit();">
-              <i class="nav-icon fas fa-power-off"></i>
+              <i class="nav-icon fas fa-power-off red"></i>
               <p>
-                {{-- <a class="dropdown-item" href="{{ route('logout') }}"
-                   onclick="event.preventDefault();
-                                 document.getElementById('logout-form').submit();">
-                    {{ __('Logout') }}
-                </a> --}}
                 Logout
-                {{-- <span class="right badge badge-danger">New</span> --}}
               </p>
             </a>
           </li>

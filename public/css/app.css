@@ -31094,6 +31094,10 @@ a.text-muted:hover {
   color: #ffffff;
 }@charset "UTF-8";
 
+.red {
+  color: #e3342f;
+}
+
 /*!
  * Bootstrap v4.4.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors
@@ -48019,7 +48023,7 @@ readers do not read off random characters that represent icons */
 }
 
 .router-link-exact-active {
-  background-color: #2191ed;
-  color: #fff !important;
+  background-color: #007bff;
+  color: #ffffff !important;
 }
 
