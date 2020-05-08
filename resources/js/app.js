@@ -7,8 +7,13 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+import { Form, HasError, AlertError } from 'vform'
 
-// import Vue from 'vue'
+window.Form = Form;
+
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
+
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
