@@ -2247,28 +2247,55 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       yearMonthString: '',
       dateTimeString: '',
-      dayString: '',
-      companyname: 'ABC Corporation'
+      dayString: ''
     };
   },
   created: function created() {
     var _this = this;
 
-    this.dateTimeString = moment__WEBPACK_IMPORTED_MODULE_0___default()().format('h:mm:ss A');
+    this.dateTimeString = moment__WEBPACK_IMPORTED_MODULE_0___default()().format('hh:mm:ss A');
     this.dayString = moment__WEBPACK_IMPORTED_MODULE_0___default()().format('dddd');
-    this.yearMonthString = moment__WEBPACK_IMPORTED_MODULE_0___default()().format('MMMM D, YYYY');
+    this.yearMonthString = moment__WEBPACK_IMPORTED_MODULE_0___default()().format('MMM DD, YYYY');
     setInterval(function () {
-      _this.dateTimeString = moment__WEBPACK_IMPORTED_MODULE_0___default()().format('h:mm:ss A');
+      _this.dateTimeString = moment__WEBPACK_IMPORTED_MODULE_0___default()().format('hh:mm:ss A');
     }, 1000);
     setInterval(function () {
       _this.dayString = moment__WEBPACK_IMPORTED_MODULE_0___default()().format('dddd');
-      _this.yearMonthString = moment__WEBPACK_IMPORTED_MODULE_0___default()().format('MMMM D, YYYY');
+      _this.yearMonthString = moment__WEBPACK_IMPORTED_MODULE_0___default()().format('MMM DD, YYYY');
     }, 60000);
   }
 });
@@ -6851,7 +6878,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.clock-wrapper{\n  border: 1px solid black;\n  box-shadow: 1px;\n  margin: 0px;\n}\n.company-name{\n  font-size: 24px;\n  font-family: sans-serif;\n  color: #000;\n  margin-top: 30px;\n}\n.month-year{\n  font-size: 45px;\n}\n.day-string{\n  margin-top: 20px;\n  font-size: 28px;\n}\n.date-time{\n  font-size: 80px;\n  font-family: sans-serif;\n  color: #000;\n  margin-top: 20px;\n  text-align: center;\n}\n.log-info{\n  border: 1px solid black;\n  height: 450px;\n}\n", ""]);
+exports.push([module.i, "\n.clock-wrapper{\n  border: 1px solid black;\n  box-shadow: 2px 3px 8px 5px #888888;\n  margin: 0px;\n}\n.company-name{\n  font-size: 24px;\n  font-family: sans-serif;\n  color: #000;\n  margin-top: 15px;\n  margin-bottom: 0px;\n}\n.month-year{\n  border: 1px solid black;\n\n  margin-top: 0px;\n  padding-top: 10px;\n  text-align: center;\n  font-size: 45px;\n  margin-bottom: 0px;\n}\n.day-string{\n  border: 1px solid black;\n  padding-top: 25px;\n  text-align: center;\n  margin-top: 0px;\n  font-size: 28px;\n}\n.date-time{\n  border: 1px solid black;\n  font-size: 85px;\n  font-family: sans-serif;\n  color: #000;\n  padding: 0px;\n  margin-top: 0px;\n  text-align: center;\n}\n.log-info{\n  border: 1px solid black;\n\n  border: 1px solid black;\n  height: 450px;\n}\n", ""]);
 
 // exports
 
@@ -61303,17 +61330,11 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row justify-content-center" }, [
-      _c("img", { attrs: { src: "img/booze.jpg", height: "80", alt: "Logo" } }),
-      _vm._v(" "),
-      _c("h5", { staticClass: "company-name" }, [
-        _vm._v(_vm._s(_vm.companyname))
-      ])
-    ]),
+    _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-6 clock-wrapper" }, [
-        _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "row mb-0" }, [
           _c("div", { staticClass: "col-md-8 month-year" }, [
             _c("b", [_vm._v(_vm._s(_vm.yearMonthString))])
           ]),
@@ -61323,16 +61344,18 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("hr"),
-        _vm._v(" "),
-        _c("p", { staticClass: "date-time" }, [
-          _c("b", [_vm._v("  " + _vm._s(_vm.dateTimeString))])
+        _c("div", { staticClass: "row justify-content-center" }, [
+          _c("div", { staticClass: "col-md-12 p-0" }, [
+            _c("p", { staticClass: "date-time" }, [
+              _c("b", [_vm._v("  " + _vm._s(_vm.dateTimeString))])
+            ])
+          ])
         ]),
         _vm._v(" "),
-        _c("hr")
+        _vm._m(1)
       ]),
       _vm._v(" "),
-      _vm._m(0)
+      _vm._m(2)
     ])
   ])
 }
@@ -61341,7 +61364,38 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-6" }, [
+    return _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-1" }, [
+        _c("img", {
+          attrs: { src: "img/booze.jpg", height: "80", alt: "Logo" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-3" }, [
+        _c("h5", { staticClass: "company-name" }, [_vm._v("ABC Corporation")]),
+        _vm._v(" "),
+        _c("small", [_vm._v("#21 Luna St. Alabang, Muntinlupa")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", name: "", value: "" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-5 offset-1" }, [
       _c("div", { staticClass: "log-info" })
     ])
   }
