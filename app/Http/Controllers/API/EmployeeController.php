@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use DB;
 use App\Employee;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -15,7 +16,13 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        return Employee::latest()->paginate(10);
+        // return Employee::latest()->paginate(10);
+        return DB::table('employees')
+                  ->join('departments', 'employees.department', '=', 'departments.id')
+                  ->orderBy('employees.created_at', 'DESC')
+                  ->select('employees.*', 'departments.id as dept_id','departments.dept_name')
+                  ->whereNull('deleted_at')
+                  ->paginate(10);
     }
 
     /**
@@ -75,7 +82,33 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      if($request->suffix ==1){
+        $suf = $request->specify;
+      }else {
+        $suf = $request->suffix;
+      }
+      $employees = Employee::findOrFail($id);
+
+      $this->validate($request,[
+        'employeeId'  => 'required|max:191|unique:employees,employeeId,'. $employees->id,
+        'firstname'  => 'required|string|max:191',
+        'middlename'   => 'max:191',
+        'lastname'   => 'required|string|max:191',
+        'suffix'  => 'max:4',
+        'gender'  => 'required',
+        'department'  => 'required',
+        'shift' => 'required',
+      ]);
+
+          $employees->employeeID  = $request->employeeId;
+          $employees->first_name  = $request->firstname;
+          $employees->middle_name   = $request->middlename;
+          $employees->last_name   = $request->lastname;
+          $employees->suffix  = $suf;
+          $employees->department  = $request->department;
+          $employees->shift = $request->shift;
+          $employees->update();
+          return "Employees's info has been Updated.";
     }
 
     /**
@@ -86,6 +119,8 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $emp = Employee::findOrFail($id);
+      $emp->delete();
+      return "Employees's record has been deleted.";
     }
 }

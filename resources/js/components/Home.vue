@@ -1,17 +1,20 @@
 <template>
     <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-1">
-          <img src="img/booze.jpg" height="80" alt="Logo">
-        </div>
-        <div class="col-md-3">
-          <h5 class="company-name">ABC Corporation</h5>
-          <small>#21 Luna St. Alabang, Muntinlupa</small>
-
-        </div>
-      </div>
       <div class="row">
         <div class="col-md-6 clock-wrapper">
+          <div class="row company-det">
+            <div class="col-md-3">
+
+            </div>
+            <div class="col-md-2">
+              <img src="img/booze.jpg" height="80" alt="Logo">
+            </div>
+            <div class="col-md-7">
+              <h5 class="company-name">ABC Corporation</h5>
+              <small>#21 Luna St. Alabang, Muntinlupa</small>
+
+            </div>
+          </div>
             <div class="row mb-0">
               <div class="col-md-8 month-year">
                 <b>{{ yearMonthString }}</b>
@@ -47,8 +50,9 @@
 <style>
 .clock-wrapper{
   border: 1px solid black;
-  box-shadow: 2px 3px 8px 5px #888888;
+  box-shadow: 4px 4px 8px 5px #888888;
   margin: 0px;
+  height: 500px;
 }
 .company-name{
   font-size: 24px;
@@ -66,6 +70,10 @@
   text-align: center;
   font-size: 45px;
   margin-bottom: 0px;
+}
+.company-det{
+  border: 1px solid black;
+  margin-top: 0px;
 }
 .day-string{
   border: 1px solid black;
@@ -85,14 +93,13 @@
 }
 .log-info{
   border: 1px solid black;
+    height: 450px;
 
-  border: 1px solid black;
-  height: 450px;
 }
 </style>
 
 <script>
-import moment from 'moment';
+// import moment from 'moment';
 
     export default {
         data() {

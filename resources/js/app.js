@@ -7,9 +7,25 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
-import { Form, HasError, AlertError } from 'vform'
+// window.Fire = require('vue');
+
+
+import moment from 'moment';
+import Swal from 'sweetalert2';
+import toastr from 'toastr';
+import { Form, HasError, AlertError } from 'vform';
 
 window.Form = Form;
+window.moment = moment;
+window.Swal = Swal;
+window.toastr = toastr;
+window.Fire = new Vue();
+
+toastr.options.progressBar = true;
+toastr.options.showEasing = 'swing';
+toastr.options.hideEasing = 'linear';
+toastr.options.closeEasing = 'swing';
+
 
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
@@ -32,6 +48,10 @@ let routes = [
   {
     path: '/employees',
     component: require('./components/Employees.vue').default
+  },
+  {
+    path: '/departments',
+    component: require('./components/Departments.vue').default
   }
 ]
 

@@ -78,7 +78,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </p>
             </router-link>
           </li>
-          <li class="nav-item has-treeview {{ Request::path() == 'employees' ? 'menu-open' : '' }} ">
+          <li class="nav-item has-treeview {{ Request::path() == 'employees' || Request::path() == 'departments' ? 'menu-open' : '' }} ">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-tasks"></i>
               <p>
@@ -94,7 +94,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </router-link>
               </li>
               <li class="nav-item">
-                <router-link to="#" class="nav-link ">
+                <router-link to="/departments" class="nav-link ">
                   <i class="fas fa-adjust  nav-icon"></i>
                   <p>Departments</p>
                 </router-link>
