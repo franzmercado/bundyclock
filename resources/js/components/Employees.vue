@@ -253,7 +253,8 @@
             $('#addModal').modal('hide');
             toastr.success('New employee added.', 'Success!');
           }).catch(()=>{
-            
+            toastr.error('Something went wrong.', 'Error!');
+
           });
         },
         delEmployee(id){

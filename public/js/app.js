@@ -2454,7 +2454,9 @@ __webpack_require__.r(__webpack_exports__);
         Fire.$emit('refreshTable');
         $('#addModal').modal('hide');
         toastr.success('New employee added.', 'Success!');
-      })["catch"](function () {});
+      })["catch"](function () {
+        toastr.error('Something went wrong.', 'Error!');
+      });
     },
     delEmployee: function delEmployee(id) {
       var _this2 = this;
