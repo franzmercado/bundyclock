@@ -1949,9 +1949,11 @@ __webpack_require__.r(__webpack_exports__);
 /*!**********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Departments.vue?vue&type=script&lang=js& ***!
   \**********************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 //
 //
 //
@@ -2026,166 +2028,114 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//     export default {
-//       data(){
-//         return {
-//           employees : {},
-//           form: new Form({
-//             employeeId : '',
-//             firstname : '',
-//             middlename : '',
-//             lastname : '',
-//             suffix : '',
-//             gender : '',
-//             department : '',
-//             shift : ''
-//           }),
-//           pickOther : false
-//         }
-//       },
-//       methods: {
-//         getEmployees(){
-//           axios.get('api/employee').then(({data}) => (this.employees = data.data));
-//       },
-//         showSpecify(){
-//           if(this.form.suffix == 1){
-//             this.pickOther = true;
-//           }else{
-//             this.pickOther = false;
-//           }
-//         },
-//         addEmployee(){
-//           this.form.post('api/employee').then(()=>{
-//             Fire.$emit('refreshTable');
-//             $('#addModal').modal('hide');
-//             toastr.success('errormsg', 'success!');
-//           });
-//         },
-//         delEmployee(id){
-//           Swal.fire({
-//             title: 'Are you sure?',
-//             text: "This employee's record will be deleted.",
-//             icon: 'warning',
-//             showCancelButton: true,
-//             confirmButtonColor: '#d33',
-//             confirmButtonText: 'Confirm'
-//           }).then((result) => {
-//             if (result.value) {
-//                 this.form.delete('api/employee/' + id).then(()=>{
-//                   Fire.$emit('refreshTable');
-//                   toastr.success('errormsg', 'success!');
-//                 }).catch(()=>{
-//                   toastr.error('errormsg', 'Error!');
-//                 });
-//             }
-//           });
-//         }
-//       },
-//         created() {
-//             this.getEmployees();
-//             Fire.$on('refreshTable', () => {
-//               this.getEmployees()
-//             });
-//         },
-//     }
-//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      departments: {},
+      isEditMode: false,
+      form: new Form({
+        id: '',
+        departmentName: ''
+      })
+    };
+  },
+  methods: {
+    getDepartments: function getDepartments() {
+      var _this = this;
+
+      axios.get('api/department').then(function (_ref) {
+        var data = _ref.data;
+        return _this.departments = data.data;
+      });
+    },
+    editModal: function editModal(dept) {
+      this.isEditMode = true;
+      this.form.clear();
+      this.form.reset();
+      this.form.id = dept.id;
+      this.form.departmentName = dept.dept_name;
+      $('#addModal').modal('show');
+    },
+    showModal: function showModal() {
+      this.form.clear();
+      this.form.reset();
+      this.isEditMode = false;
+      $('#addModal').modal('show');
+    },
+    uptDepartment: function uptDepartment() {
+      var _this2 = this;
+
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "This employee's record will be deleted.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        confirmButtonText: 'Confirm'
+      }).then(function (result) {
+        if (result.value) {
+          _this2.form.put('api/department/' + _this2.form.id).then(function (response) {
+            Fire.$emit('refreshTable');
+            toastr.success(response.data, 'Success!');
+            $('#addModal').modal('hide');
+          })["catch"](function () {
+            toastr.error('Something went wrong.', 'Error!');
+          });
+        }
+      });
+    },
+    addDepartment: function addDepartment() {
+      var _this3 = this;
+
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "This department will be added.",
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#6cb2eb',
+        confirmButtonText: 'Confirm'
+      }).then(function (result) {
+        if (result.value) {
+          _this3.form.post('api/department').then(function () {
+            Fire.$emit('refreshTable');
+            $('#addModal').modal('hide');
+            toastr.success('New department added.', 'Success!');
+          })["catch"](function () {// toastr.error('Something went wrong.', 'Error!');
+          });
+        }
+      });
+    },
+    delDepartment: function delDepartment(id) {
+      var _this4 = this;
+
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "This employee's record will be deleted.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        confirmButtonText: 'Confirm'
+      }).then(function (result) {
+        if (result.value) {
+          _this4.form["delete"]('api/department/' + id).then(function () {
+            Fire.$emit('refreshTable');
+            toastr.success('errormsg', 'success!');
+          })["catch"](function () {
+            toastr.error('errormsg', 'Error!');
+          });
+        }
+      });
+    }
+  },
+  created: function created() {
+    var _this5 = this;
+
+    this.getDepartments();
+    Fire.$on('refreshTable', function () {
+      _this5.getDepartments();
+    });
+  }
+});
 
 /***/ }),
 
@@ -2198,6 +2148,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2407,6 +2364,10 @@ __webpack_require__.r(__webpack_exports__);
         console.log('error');
       });
     },
+    uploadProfile: function uploadProfile(e) {
+      // console.log(e);
+      var file = e.files[0]; // console.log(file);
+    },
     editModal: function editModal(emp) {
       this.isEditMode = true;
       this.form.clear();
@@ -2452,16 +2413,29 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     addEmployee: function addEmployee() {
-      this.form.post('api/employee').then(function () {
-        Fire.$emit('refreshTable');
-        $('#addModal').modal('hide');
-        toastr.success('New employee added.', 'Success!');
-      })["catch"](function () {
-        toastr.error('Something went wrong.', 'Error!');
+      var _this2 = this;
+
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "This will store employee's record.",
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#6cb2eb',
+        confirmButtonText: 'Confirm'
+      }).then(function (result) {
+        if (result.value) {
+          _this2.form.post('api/employee').then(function () {
+            Fire.$emit('refreshTable');
+            $('#addModal').modal('hide');
+            toastr.success('New employee added.', 'Success!');
+          })["catch"](function () {
+            toastr.error('Something went wrong.', 'Error!');
+          });
+        }
       });
     },
     delEmployee: function delEmployee(id) {
-      var _this2 = this;
+      var _this3 = this;
 
       Swal.fire({
         title: 'Are you sure?',
@@ -2472,7 +2446,7 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: 'Confirm'
       }).then(function (result) {
         if (result.value) {
-          _this2.form["delete"]('api/employee/' + id).then(function (response) {
+          _this3.form["delete"]('api/employee/' + id).then(function (response) {
             Fire.$emit('refreshTable');
             toastr.success(response.data, 'Success!');
           })["catch"](function () {
@@ -2482,21 +2456,34 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     uptEmployee: function uptEmployee() {
-      this.form.put('api/employee/' + this.form.id).then(function (response) {
-        Fire.$emit('refreshTable');
-        toastr.success(response.data, 'Success!');
-        $('#addModal').modal('hide');
-      })["catch"](function () {
-        toastr.error('Something went wrong.', 'Error!');
+      var _this4 = this;
+
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "This will save changes.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        confirmButtonText: 'Confirm'
+      }).then(function (result) {
+        if (result.value) {
+          _this4.form.put('api/employee/' + _this4.form.id).then(function (response) {
+            Fire.$emit('refreshTable');
+            toastr.success(response.data, 'Success!');
+            $('#addModal').modal('hide');
+          })["catch"](function () {
+            toastr.error('Something went wrong.', 'Error!');
+          });
+        }
       });
     }
   },
   created: function created() {
-    var _this3 = this;
+    var _this5 = this;
 
     this.getEmployees();
     Fire.$on('refreshTable', function () {
-      _this3.getEmployees();
+      _this5.getEmployees();
     });
   }
 });
@@ -64478,7 +64465,21 @@ var render = function() {
       _c("div", { staticClass: "col-md-8 offset-2" }, [
         _c("br"),
         _vm._v(" "),
-        _vm._m(0),
+        _c("div", { staticClass: "row" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-2" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary ",
+                attrs: { type: "button" },
+                on: { click: _vm.showModal }
+              },
+              [_c("i", { staticClass: "fas fa-plus" }, [_vm._v(" New ")])]
+            )
+          ])
+        ]),
         _vm._v(" "),
         _c("hr"),
         _vm._v(" "),
@@ -64486,21 +64487,32 @@ var render = function() {
           "table",
           {
             staticClass: "table table-bordered table-striped",
-            attrs: { id: "employee_tbl" }
+            attrs: { id: "dept_tbl" }
           },
           [
             _vm._m(1),
             _vm._v(" "),
             _c(
               "tbody",
-              _vm._l(_vm.employees, function(employee) {
+              _vm._l(_vm.departments, function(dept) {
                 return _c("tr", [
-                  _c("td", [_vm._v(_vm._s(employee.employeeID))]),
+                  _c("td", [_vm._v(_vm._s(dept.id))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(employee.employeeID))]),
+                  _c("td", [_vm._v(_vm._s(dept.dept_name))]),
                   _vm._v(" "),
                   _c("td", [
-                    _vm._m(2, true),
+                    _c(
+                      "a",
+                      {
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            return _vm.editModal(dept)
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "fa fa-edit fa-lg cyan" })]
+                    ),
                     _vm._v(" "),
                     _c(
                       "a",
@@ -64508,7 +64520,7 @@ var render = function() {
                         attrs: { href: "#" },
                         on: {
                           click: function($event) {
-                            return _vm.delEmployee(employee.id)
+                            return _vm.delDepartment(dept.id)
                           }
                         }
                       },
@@ -64522,7 +64534,156 @@ var render = function() {
           ]
         )
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "addModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "addModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      _vm.isEditMode ? _vm.uptDepartment() : _vm.addDepartment()
+                    },
+                    keydown: function($event) {
+                      return _vm.form.onKeydown($event)
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-8 offset-2" }, [
+                        _c(
+                          "div",
+                          { staticClass: "form-group" },
+                          [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "mb-0",
+                                attrs: { for: "employeeID" }
+                              },
+                              [
+                                _c("font", { attrs: { color: "red" } }, [
+                                  _vm._v("*")
+                                ]),
+                                _vm._v("Department:")
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.departmentName,
+                                  expression: "form.departmentName"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              class: {
+                                "is-invalid": _vm.form.errors.has(
+                                  "departmentName"
+                                )
+                              },
+                              attrs: { type: "text", name: "departmentName" },
+                              domProps: { value: _vm.form.departmentName },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.form,
+                                    "departmentName",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("has-error", {
+                              attrs: { form: _vm.form, field: "departmentName" }
+                            })
+                          ],
+                          1
+                        )
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-secondary",
+                        attrs: { type: "button", "data-dismiss": "modal" }
+                      },
+                      [_vm._v("Cancel")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !_vm.isEditMode,
+                            expression: "!isEditMode"
+                          }
+                        ],
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "submit" }
+                      },
+                      [_vm._v("Submit")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.isEditMode,
+                            expression: "isEditMode"
+                          }
+                        ],
+                        staticClass: "btn btn-warning",
+                        attrs: { type: "submit" }
+                      },
+                      [_vm._v("Update")]
+                    )
+                  ])
+                ]
+              )
+            ])
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -64530,27 +64691,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-10" }, [
-        _c("h5", [
-          _c("i", { staticClass: "fas fa-users" }),
-          _vm._v(" Departments")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-2" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary ",
-            attrs: {
-              type: "button",
-              "data-toggle": "modal",
-              "data-target": "#addModal"
-            }
-          },
-          [_c("i", { staticClass: "fas fa-plus" }, [_vm._v(" New ")])]
-        )
+    return _c("div", { staticClass: "col-md-10" }, [
+      _c("h5", [
+        _c("i", { staticClass: "fas fa-users" }),
+        _vm._v(" Departments")
       ])
     ])
   },
@@ -64572,8 +64716,23 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("a", { attrs: { href: "#" } }, [
-      _c("i", { staticClass: "fa fa-edit fa-lg cyan" })
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title", attrs: { id: "addModalLabel" } }, [
+        _vm._v("New Department")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
     ])
   }
 ]
@@ -64753,6 +64912,17 @@ var render = function() {
                 },
                 [
                   _c("div", { staticClass: "modal-body" }, [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-12" }, [
+                        _c("input", {
+                          attrs: { type: "file", name: "prof", value: "" },
+                          on: { change: _vm.uploadProfile }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("br"),
+                    _vm._v(" "),
                     _c("div", { staticClass: "row" }, [
                       _c("div", { staticClass: "col-md-6" }, [
                         _c(
@@ -80917,15 +81087,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!*************************************************!*\
   !*** ./resources/js/components/Departments.vue ***!
   \*************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Departments_vue_vue_type_template_id_07e889c6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Departments.vue?vue&type=template&id=07e889c6& */ "./resources/js/components/Departments.vue?vue&type=template&id=07e889c6&");
 /* harmony import */ var _Departments_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Departments.vue?vue&type=script&lang=js& */ "./resources/js/components/Departments.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Departments_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Departments_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -80955,15 +81124,13 @@ component.options.__file = "resources/js/components/Departments.vue"
 /*!**************************************************************************!*\
   !*** ./resources/js/components/Departments.vue?vue&type=script&lang=js& ***!
   \**************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Departments_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Departments.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Departments.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Departments_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Departments_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Departments_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Departments_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Departments_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Departments_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 

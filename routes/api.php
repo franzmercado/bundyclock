@@ -18,7 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
  Route::middleware('auth:api')->group(function() {
-  Route::apiResources([
-    'employee' => 'API\EmployeeController'
-  ]);
+  Route::apiResources(['employee' => 'API\EmployeeController']);
+  Route::apiResources(['department' => 'API\DepartmentController']);
+
  });

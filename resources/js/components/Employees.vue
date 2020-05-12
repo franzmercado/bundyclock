@@ -54,6 +54,13 @@
       <form @submit.prevent="isEditMode ? uptEmployee() : addEmployee()" @keydown="form.onKeydown($event)" >
       <div class="modal-body">
         <div class="row">
+          <div class="col-md-12">
+            <input type="file" name="prof" v-on:change="uploadProfile" value="">
+
+          </div>
+        </div>
+        <br>
+        <div class="row">
           <div class="col-md-6">
             <div class="form-group">
               <label class="mb-0" for="employeeID"><font color="red">*</font>Employee ID:</label>
@@ -203,6 +210,11 @@
             console.log('error');
           });
       },
+      uploadProfile(e){
+        // console.log(e);
+        let file = e.files[0];
+        // console.log(file);
+      },
         editModal(emp){
         this.isEditMode = true;
         this.form.clear();
@@ -250,14 +262,26 @@
           }
         },
         addEmployee(){
-          this.form.post('api/employee').then(()=>{
-            Fire.$emit('refreshTable');
-            $('#addModal').modal('hide');
-            toastr.success('New employee added.', 'Success!');
-          }).catch(()=>{
-            toastr.error('Something went wrong.', 'Error!');
+          Swal.fire({
+            title: 'Are you sure?',
+            text: "This will store employee's record.",
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#6cb2eb',
+            confirmButtonText: 'Confirm'
+          }).then((result) => {
+            if (result.value) {
+              this.form.post('api/employee').then(()=>{
+                Fire.$emit('refreshTable');
+                $('#addModal').modal('hide');
+                toastr.success('New employee added.', 'Success!');
+              }).catch(()=>{
+                toastr.error('Something went wrong.', 'Error!');
 
+              });
+            }
           });
+
         },
         delEmployee(id){
           Swal.fire({
@@ -279,15 +303,28 @@
           });
         },
         uptEmployee(){
-          this.form.put('api/employee/'+ this.form.id).then((response) =>{
-            Fire.$emit('refreshTable');
-            toastr.success(response.data, 'Success!');
-            $('#addModal').modal('hide');
+          Swal.fire({
+            title: 'Are you sure?',
+            text: "This will save changes.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            confirmButtonText: 'Confirm'
+          }).then((result) => {
+            if (result.value) {
+              this.form.put('api/employee/'+ this.form.id).then((response) =>{
+                Fire.$emit('refreshTable');
+                toastr.success(response.data, 'Success!');
+                $('#addModal').modal('hide');
 
-          }).catch(() =>{
-            toastr.error('Something went wrong.', 'Error!');
+              }).catch(() =>{
+                toastr.error('Something went wrong.', 'Error!');
 
+              });
+            }
           });
+
+
         }
 
       },
