@@ -17,6 +17,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResources([
-  'employee' => 'API\EmployeeController'
-]);
+ Route::middleware('auth:api')->group(function() {
+  Route::apiResources([
+    'employee' => 'API\EmployeeController'
+  ]);
+ });

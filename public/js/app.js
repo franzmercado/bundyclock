@@ -2403,6 +2403,8 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('api/employee').then(function (_ref) {
         var data = _ref.data;
         return _this.employees = data.data;
+      })["catch"](function () {
+        console.log('error');
       });
     },
     editModal: function editModal(emp) {

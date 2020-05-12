@@ -199,7 +199,9 @@
       },
       methods: {
         getEmployees(){
-          axios.get('api/employee').then(({data}) => (this.employees = data.data));
+          axios.get('api/employee').then(({data}) => (this.employees = data.data)).catch(()=>{
+            console.log('error');
+          });
       },
         editModal(emp){
         this.isEditMode = true;
