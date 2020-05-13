@@ -15,6 +15,7 @@
                  <table id="employee_tbl" class="table table-bordered table-striped">
                    <thead>
                    <tr>
+                     <th>Image</th>
                      <th>Employee ID</th>
                      <th>Name</th>
                      <th>Department</th>
@@ -24,6 +25,7 @@
                    </thead>
                    <tbody>
                   <tr v-for="employee in employees">
+                    <td class="p-1"><a title="Click to change" v-on:click="showImgModal(employee.id,employee.photo)" ><img class="profile" :src="'/img/employees/' +employee.photo" height="40"></a></img></td>
                     <td>{{employee.employeeID}}</td>
                     <td>{{employee.first_name}}</td>
                     <td>{{employee.dept_name}}</td>
@@ -53,13 +55,7 @@
       </div>
       <form @submit.prevent="isEditMode ? uptEmployee() : addEmployee()" @keydown="form.onKeydown($event)" >
       <div class="modal-body">
-        <div class="row">
-          <div class="col-md-12">
-            <input type="file" name="prof" v-on:change="uploadProfile" value="">
 
-          </div>
-        </div>
-        <br>
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
@@ -181,8 +177,43 @@
     </div>
   </div>
   </div>
+  <!--Image Modal -->
+  <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addModalLabel">Change Picture</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form v-on:submit.prevent="uptphoto">
+      <div class="modal-body">
+        <div class="row justify-content-center">
+            <img src="/" id="empImg"  height="200" alt="Profile">
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-10 offset-1">
+            <input v-on:change="uploadProfile"type="file"class="form-control" name="newImg" id="newImg" required>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Update</button>
+      </div>
+      </form>
+    </div>
+  </div>
+  </div>
     </div>
 </template>
+<style>
+  .profile{
+    cursor: pointer;
+  }
+</style>
 
 <script>
     export default {
@@ -201,7 +232,10 @@
             shift : ''
           }),
           pickOther : false,
-          isEditMode: false
+          id: '',
+          photo: '',
+          isEditMode: false,
+
         }
       },
       methods: {
@@ -211,9 +245,30 @@
           });
       },
       uploadProfile(e){
-        // console.log(e);
-        let file = e.files[0];
-        // console.log(file);
+        let file = e.target.files[0];
+        let reader = new FileReader();
+
+        if(file['size'] < 2111775){
+          reader.onloadend = (file) => {
+            // console.log('RESULT', reader.result);
+            this.photo = reader.result;
+          }
+          reader.readAsDataURL(file);
+        }else {
+          $('#newImg').val('');
+          toastr.error('The file size is too large.', 'Error!');
+        }
+      },
+      uptphoto(){
+        console.log(this.photo);
+        axios.put('api/employee/newProfile/'+ this.id, {'photo' : this.photo}).then((response) =>{
+          Fire.$emit('refreshTable');
+          toastr.success('Image updated.', 'Success!');
+          $('#imgModal').modal('hide');
+        }).catch(() =>{
+          toastr.error('Something went wrong.', 'Error!');
+
+        });
       },
         editModal(emp){
         this.isEditMode = true;
@@ -253,6 +308,13 @@
         this.isEditMode = false;
         this.pickOther = false;
         $('#addModal').modal('show');
+      },
+      showImgModal(id, showImg){
+        this.id = id;
+        $('#empImg').attr('src', '/img/employees/'+ showImg);
+
+        $('#imgModal').modal('show');
+
       },
         showSpecify(){
           if(this.form.suffix == 1){

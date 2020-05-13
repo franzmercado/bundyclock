@@ -61,6 +61,7 @@ class EmployeeController extends Controller
       ]);
 
         return Employee::create([
+          'photo'  => 'photo.png',
           'employeeID'  => $request['employeeId'],
           'first_name'  => $request['firstname'],
           'middle_name'   => $request['middlename'],
@@ -133,4 +134,36 @@ class EmployeeController extends Controller
       $emp->delete();
       return "Employees's record has been deleted.";
     }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function newProfile(Request $request, $id)
+    {
+      // return $request->photo;
+      $name = time().'.' . explode('/', explode(':', substr($request->photo, 0, strpos($request->photo, ';')))[1])[1];
+
+      $newImg = Employee::findOrFail($id);
+      $currentImg = $newImg->photo;
+      $newImg->photo = $name;
+      $newImg->update();
+
+      \Image::make($request->photo)->save(public_path('img/employees/').$name);
+
+      if ($currentImg == 'default.png') {
+        // code...
+      }else {
+        $delImg = public_path('img/employees/').$currentImg;
+        if (file_exists($delImg)) {
+          @unlink($delImg);
+        }
+      }
+
+      return "Image uploaded.";
+    }
+
 }

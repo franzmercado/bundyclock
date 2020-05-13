@@ -9,7 +9,7 @@ class Employee extends Model
   protected $table = 'employees';
   use SoftDeletes;
   protected $fillable = [
-      'employeeID', 'first_name', 'middle_name', 'last_name', 'suffix', 'gender', 'department', 'shift',
+      'photo', 'employeeID', 'first_name', 'middle_name', 'last_name', 'suffix', 'gender', 'department', 'shift',
   ];
   public $timestamps = true;
 }
